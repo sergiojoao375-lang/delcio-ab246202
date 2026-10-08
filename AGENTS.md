@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+- Vocabulary flashcards are created server-side in addMessage when an assistant message has a correction — keeps the word bank automatic.
+- Course certificates are issued only through the authenticated database function after a passed final exam, and public verification exposes only certificate fields.
