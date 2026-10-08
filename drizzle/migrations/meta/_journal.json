@@ -43,6 +43,13 @@
       "when": 1791476507688,
       "tag": "0005_auto_lessons_per_user",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1791476516630,
+      "tag": "0006_learning_plan_streak_tests",
+      "breakpoints": true
     }
   ]
 }
