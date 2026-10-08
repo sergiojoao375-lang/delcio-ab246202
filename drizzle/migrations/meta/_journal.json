@@ -57,6 +57,13 @@
       "when": 1791476523491,
       "tag": "0007_vocab_items",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1791476530170,
+      "tag": "0008_course_certificates",
+      "breakpoints": true
     }
   ]
 }
