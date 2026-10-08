@@ -15,6 +15,13 @@
       "when": 1791476479038,
       "tag": "0001_revoke_function_execute_anon_authenticated",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791476483944,
+      "tag": "0002_revoke_function_execute_public",
+      "breakpoints": true
     }
   ]
 }
