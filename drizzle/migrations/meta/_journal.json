@@ -71,6 +71,13 @@
       "when": 1791476536300,
       "tag": "0009_public_certificate_verification",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1791476544292,
+      "tag": "0010_secure_certificate_issuance",
+      "breakpoints": true
     }
   ]
 }
