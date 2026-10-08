@@ -36,6 +36,13 @@
       "when": 1791476494819,
       "tag": "0004_handle_new_user_first_admin",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1791476507688,
+      "tag": "0005_auto_lessons_per_user",
+      "breakpoints": true
     }
   ]
 }
