@@ -10,33 +10,309 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as CertificadoExemploRouteImport } from './routes/certificado-exemplo'
+import { Route as DebugRouteImport } from './routes/debug'
+import { Route as OfflineRouteImport } from './routes/offline'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedHistoricoRouteImport } from './routes/_authenticated/historico'
+import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedProgressoRouteImport } from './routes/_authenticated/progresso'
+import { Route as AuthenticatedPronunciaRouteImport } from './routes/_authenticated/pronuncia'
+import { Route as AuthenticatedTesteRouteImport } from './routes/_authenticated/teste'
+import { Route as AuthenticatedVocabularioRouteImport } from './routes/_authenticated/vocabulario'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ApiSttRouteImport } from './routes/api/stt'
+import { Route as ApiTtsRouteImport } from './routes/api/tts'
+import { Route as VerificarCodigoRouteImport } from './routes/verificar.$codigo'
+import { Route as AuthenticatedAulasIndexRouteImport } from './routes/_authenticated/aulas.index'
+import { Route as AuthenticatedAulasIdRouteImport } from './routes/_authenticated/aulas.$id'
+import { Route as AuthenticatedRoleplayIndexRouteImport } from './routes/_authenticated/roleplay.index'
+import { Route as AuthenticatedRoleplayIdRouteImport } from './routes/_authenticated/roleplay.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CertificadoExemploRoute = CertificadoExemploRouteImport.update({
+  id: '/certificado-exemplo',
+  path: '/certificado-exemplo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DebugRoute = DebugRouteImport.update({
+  id: '/debug',
+  path: '/debug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OfflineRoute = OfflineRouteImport.update({
+  id: '/offline',
+  path: '/offline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedHistoricoRoute = AuthenticatedHistoricoRouteImport.update({
+  id: '/historico',
+  path: '/historico',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedProgressoRoute = AuthenticatedProgressoRouteImport.update({
+  id: '/progresso',
+  path: '/progresso',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPronunciaRoute = AuthenticatedPronunciaRouteImport.update({
+  id: '/pronuncia',
+  path: '/pronuncia',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTesteRoute = AuthenticatedTesteRouteImport.update({
+  id: '/teste',
+  path: '/teste',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedVocabularioRoute =
+  AuthenticatedVocabularioRouteImport.update({
+    id: '/vocabulario',
+    path: '/vocabulario',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSttRoute = ApiSttRouteImport.update({
+  id: '/api/stt',
+  path: '/api/stt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiTtsRoute = ApiTtsRouteImport.update({
+  id: '/api/tts',
+  path: '/api/tts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerificarCodigoRoute = VerificarCodigoRouteImport.update({
+  id: '/verificar/$codigo',
+  path: '/verificar/$codigo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAulasIndexRoute = AuthenticatedAulasIndexRouteImport.update({
+  id: '/aulas/',
+  path: '/aulas/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAulasIdRoute = AuthenticatedAulasIdRouteImport.update({
+  id: '/aulas/$id',
+  path: '/aulas/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRoleplayIndexRoute =
+  AuthenticatedRoleplayIndexRouteImport.update({
+    id: '/roleplay/',
+    path: '/roleplay/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedRoleplayIdRoute = AuthenticatedRoleplayIdRouteImport.update({
+  id: '/roleplay/$id',
+  path: '/roleplay/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/certificado-exemplo': typeof CertificadoExemploRoute
+  '/debug': typeof DebugRoute
+  '/offline': typeof OfflineRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/historico': typeof AuthenticatedHistoricoRoute
+  '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/progresso': typeof AuthenticatedProgressoRoute
+  '/pronuncia': typeof AuthenticatedPronunciaRoute
+  '/teste': typeof AuthenticatedTesteRoute
+  '/vocabulario': typeof AuthenticatedVocabularioRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/stt': typeof ApiSttRoute
+  '/api/tts': typeof ApiTtsRoute
+  '/verificar/$codigo': typeof VerificarCodigoRoute
+  '/aulas/$id': typeof AuthenticatedAulasIdRoute
+  '/roleplay/$id': typeof AuthenticatedRoleplayIdRoute
+  '/aulas/': typeof AuthenticatedAulasIndexRoute
+  '/roleplay/': typeof AuthenticatedRoleplayIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/certificado-exemplo': typeof CertificadoExemploRoute
+  '/debug': typeof DebugRoute
+  '/offline': typeof OfflineRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/historico': typeof AuthenticatedHistoricoRoute
+  '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/progresso': typeof AuthenticatedProgressoRoute
+  '/pronuncia': typeof AuthenticatedPronunciaRoute
+  '/teste': typeof AuthenticatedTesteRoute
+  '/vocabulario': typeof AuthenticatedVocabularioRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/stt': typeof ApiSttRoute
+  '/api/tts': typeof ApiTtsRoute
+  '/verificar/$codigo': typeof VerificarCodigoRoute
+  '/aulas/$id': typeof AuthenticatedAulasIdRoute
+  '/roleplay/$id': typeof AuthenticatedRoleplayIdRoute
+  '/aulas': typeof AuthenticatedAulasIndexRoute
+  '/roleplay': typeof AuthenticatedRoleplayIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/certificado-exemplo': typeof CertificadoExemploRoute
+  '/debug': typeof DebugRoute
+  '/offline': typeof OfflineRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/historico': typeof AuthenticatedHistoricoRoute
+  '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/progresso': typeof AuthenticatedProgressoRoute
+  '/_authenticated/pronuncia': typeof AuthenticatedPronunciaRoute
+  '/_authenticated/teste': typeof AuthenticatedTesteRoute
+  '/_authenticated/vocabulario': typeof AuthenticatedVocabularioRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/stt': typeof ApiSttRoute
+  '/api/tts': typeof ApiTtsRoute
+  '/verificar/$codigo': typeof VerificarCodigoRoute
+  '/_authenticated/aulas/$id': typeof AuthenticatedAulasIdRoute
+  '/_authenticated/roleplay/$id': typeof AuthenticatedRoleplayIdRoute
+  '/_authenticated/aulas/': typeof AuthenticatedAulasIndexRoute
+  '/_authenticated/roleplay/': typeof AuthenticatedRoleplayIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/auth'
+    | '/certificado-exemplo'
+    | '/debug'
+    | '/offline'
+    | '/sitemap.xml'
+    | '/admin'
+    | '/historico'
+    | '/onboarding'
+    | '/progresso'
+    | '/pronuncia'
+    | '/teste'
+    | '/vocabulario'
+    | '/api/chat'
+    | '/api/stt'
+    | '/api/tts'
+    | '/verificar/$codigo'
+    | '/aulas/$id'
+    | '/roleplay/$id'
+    | '/aulas/'
+    | '/roleplay/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/auth'
+    | '/certificado-exemplo'
+    | '/debug'
+    | '/offline'
+    | '/sitemap.xml'
+    | '/admin'
+    | '/historico'
+    | '/onboarding'
+    | '/progresso'
+    | '/pronuncia'
+    | '/teste'
+    | '/vocabulario'
+    | '/api/chat'
+    | '/api/stt'
+    | '/api/tts'
+    | '/verificar/$codigo'
+    | '/aulas/$id'
+    | '/roleplay/$id'
+    | '/aulas'
+    | '/roleplay'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/about'
+    | '/auth'
+    | '/certificado-exemplo'
+    | '/debug'
+    | '/offline'
+    | '/sitemap.xml'
+    | '/_authenticated/admin'
+    | '/_authenticated/historico'
+    | '/_authenticated/onboarding'
+    | '/_authenticated/progresso'
+    | '/_authenticated/pronuncia'
+    | '/_authenticated/teste'
+    | '/_authenticated/vocabulario'
+    | '/api/chat'
+    | '/api/stt'
+    | '/api/tts'
+    | '/verificar/$codigo'
+    | '/_authenticated/aulas/$id'
+    | '/_authenticated/roleplay/$id'
+    | '/_authenticated/aulas/'
+    | '/_authenticated/roleplay/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AboutRoute: typeof AboutRoute
+  AuthRoute: typeof AuthRoute
+  CertificadoExemploRoute: typeof CertificadoExemploRoute
+  DebugRoute: typeof DebugRoute
+  OfflineRoute: typeof OfflineRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiChatRoute: typeof ApiChatRoute
+  ApiSttRoute: typeof ApiSttRoute
+  ApiTtsRoute: typeof ApiTtsRoute
+  VerificarCodigoRoute: typeof VerificarCodigoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +324,207 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/certificado-exemplo': {
+      id: '/certificado-exemplo'
+      path: '/certificado-exemplo'
+      fullPath: '/certificado-exemplo'
+      preLoaderRoute: typeof CertificadoExemploRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/debug': {
+      id: '/debug'
+      path: '/debug'
+      fullPath: '/debug'
+      preLoaderRoute: typeof DebugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/offline': {
+      id: '/offline'
+      path: '/offline'
+      fullPath: '/offline'
+      preLoaderRoute: typeof OfflineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/historico': {
+      id: '/_authenticated/historico'
+      path: '/historico'
+      fullPath: '/historico'
+      preLoaderRoute: typeof AuthenticatedHistoricoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/onboarding': {
+      id: '/_authenticated/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/progresso': {
+      id: '/_authenticated/progresso'
+      path: '/progresso'
+      fullPath: '/progresso'
+      preLoaderRoute: typeof AuthenticatedProgressoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/pronuncia': {
+      id: '/_authenticated/pronuncia'
+      path: '/pronuncia'
+      fullPath: '/pronuncia'
+      preLoaderRoute: typeof AuthenticatedPronunciaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/teste': {
+      id: '/_authenticated/teste'
+      path: '/teste'
+      fullPath: '/teste'
+      preLoaderRoute: typeof AuthenticatedTesteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/vocabulario': {
+      id: '/_authenticated/vocabulario'
+      path: '/vocabulario'
+      fullPath: '/vocabulario'
+      preLoaderRoute: typeof AuthenticatedVocabularioRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/stt': {
+      id: '/api/stt'
+      path: '/api/stt'
+      fullPath: '/api/stt'
+      preLoaderRoute: typeof ApiSttRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/tts': {
+      id: '/api/tts'
+      path: '/api/tts'
+      fullPath: '/api/tts'
+      preLoaderRoute: typeof ApiTtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verificar/$codigo': {
+      id: '/verificar/$codigo'
+      path: '/verificar/$codigo'
+      fullPath: '/verificar/$codigo'
+      preLoaderRoute: typeof VerificarCodigoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/aulas/': {
+      id: '/_authenticated/aulas/'
+      path: '/aulas'
+      fullPath: '/aulas/'
+      preLoaderRoute: typeof AuthenticatedAulasIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/aulas/$id': {
+      id: '/_authenticated/aulas/$id'
+      path: '/aulas/$id'
+      fullPath: '/aulas/$id'
+      preLoaderRoute: typeof AuthenticatedAulasIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/roleplay/': {
+      id: '/_authenticated/roleplay/'
+      path: '/roleplay'
+      fullPath: '/roleplay/'
+      preLoaderRoute: typeof AuthenticatedRoleplayIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/roleplay/$id': {
+      id: '/_authenticated/roleplay/$id'
+      path: '/roleplay/$id'
+      fullPath: '/roleplay/$id'
+      preLoaderRoute: typeof AuthenticatedRoleplayIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedHistoricoRoute: typeof AuthenticatedHistoricoRoute
+  AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedProgressoRoute: typeof AuthenticatedProgressoRoute
+  AuthenticatedPronunciaRoute: typeof AuthenticatedPronunciaRoute
+  AuthenticatedTesteRoute: typeof AuthenticatedTesteRoute
+  AuthenticatedVocabularioRoute: typeof AuthenticatedVocabularioRoute
+  AuthenticatedAulasIdRoute: typeof AuthenticatedAulasIdRoute
+  AuthenticatedRoleplayIdRoute: typeof AuthenticatedRoleplayIdRoute
+  AuthenticatedAulasIndexRoute: typeof AuthenticatedAulasIndexRoute
+  AuthenticatedRoleplayIndexRoute: typeof AuthenticatedRoleplayIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedHistoricoRoute: AuthenticatedHistoricoRoute,
+  AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedProgressoRoute: AuthenticatedProgressoRoute,
+  AuthenticatedPronunciaRoute: AuthenticatedPronunciaRoute,
+  AuthenticatedTesteRoute: AuthenticatedTesteRoute,
+  AuthenticatedVocabularioRoute: AuthenticatedVocabularioRoute,
+  AuthenticatedAulasIdRoute: AuthenticatedAulasIdRoute,
+  AuthenticatedRoleplayIdRoute: AuthenticatedRoleplayIdRoute,
+  AuthenticatedAulasIndexRoute: AuthenticatedAulasIndexRoute,
+  AuthenticatedRoleplayIndexRoute: AuthenticatedRoleplayIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AboutRoute: AboutRoute,
+  AuthRoute: AuthRoute,
+  CertificadoExemploRoute: CertificadoExemploRoute,
+  DebugRoute: DebugRoute,
+  OfflineRoute: OfflineRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiChatRoute: ApiChatRoute,
+  ApiSttRoute: ApiSttRoute,
+  ApiTtsRoute: ApiTtsRoute,
+  VerificarCodigoRoute: VerificarCodigoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
