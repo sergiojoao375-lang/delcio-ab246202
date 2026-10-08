@@ -64,6 +64,13 @@
       "when": 1791476530170,
       "tag": "0008_course_certificates",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1791476536300,
+      "tag": "0009_public_certificate_verification",
+      "breakpoints": true
     }
   ]
 }
