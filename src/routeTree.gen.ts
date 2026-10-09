@@ -18,7 +18,9 @@ import { Route as DebugRouteImport } from './routes/debug'
 import { Route as OfflineRouteImport } from './routes/offline'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedChamadaRouteImport } from './routes/_authenticated/chamada'
 import { Route as AuthenticatedHistoricoRouteImport } from './routes/_authenticated/historico'
+import { Route as AuthenticatedLigaRouteImport } from './routes/_authenticated/liga'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedProgressoRouteImport } from './routes/_authenticated/progresso'
 import { Route as AuthenticatedPronunciaRouteImport } from './routes/_authenticated/pronuncia'
@@ -30,6 +32,8 @@ import { Route as ApiTtsRouteImport } from './routes/api/tts'
 import { Route as VerificarCodigoRouteImport } from './routes/verificar.$codigo'
 import { Route as AuthenticatedAulasIndexRouteImport } from './routes/_authenticated/aulas.index'
 import { Route as AuthenticatedAulasIdRouteImport } from './routes/_authenticated/aulas.$id'
+import { Route as AuthenticatedHistoriasIndexRouteImport } from './routes/_authenticated/historias.index'
+import { Route as AuthenticatedHistoriasIdRouteImport } from './routes/_authenticated/historias.$id'
 import { Route as AuthenticatedRoleplayIndexRouteImport } from './routes/_authenticated/roleplay.index'
 import { Route as AuthenticatedRoleplayIdRouteImport } from './routes/_authenticated/roleplay.$id'
 
@@ -77,9 +81,19 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedChamadaRoute = AuthenticatedChamadaRouteImport.update({
+  id: '/chamada',
+  path: '/chamada',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedHistoricoRoute = AuthenticatedHistoricoRouteImport.update({
   id: '/historico',
   path: '/historico',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedLigaRoute = AuthenticatedLigaRouteImport.update({
+  id: '/liga',
+  path: '/liga',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
@@ -138,6 +152,18 @@ const AuthenticatedAulasIdRoute = AuthenticatedAulasIdRouteImport.update({
   path: '/aulas/$id',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedHistoriasIndexRoute =
+  AuthenticatedHistoriasIndexRouteImport.update({
+    id: '/historias/',
+    path: '/historias/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedHistoriasIdRoute =
+  AuthenticatedHistoriasIdRouteImport.update({
+    id: '/historias/$id',
+    path: '/historias/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedRoleplayIndexRoute =
   AuthenticatedRoleplayIndexRouteImport.update({
     id: '/roleplay/',
@@ -159,7 +185,9 @@ export interface FileRoutesByFullPath {
   '/offline': typeof OfflineRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/chamada': typeof AuthenticatedChamadaRoute
   '/historico': typeof AuthenticatedHistoricoRoute
+  '/liga': typeof AuthenticatedLigaRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/progresso': typeof AuthenticatedProgressoRoute
   '/pronuncia': typeof AuthenticatedPronunciaRoute
@@ -170,8 +198,10 @@ export interface FileRoutesByFullPath {
   '/api/tts': typeof ApiTtsRoute
   '/verificar/$codigo': typeof VerificarCodigoRoute
   '/aulas/$id': typeof AuthenticatedAulasIdRoute
+  '/historias/$id': typeof AuthenticatedHistoriasIdRoute
   '/roleplay/$id': typeof AuthenticatedRoleplayIdRoute
   '/aulas/': typeof AuthenticatedAulasIndexRoute
+  '/historias/': typeof AuthenticatedHistoriasIndexRoute
   '/roleplay/': typeof AuthenticatedRoleplayIndexRoute
 }
 export interface FileRoutesByTo {
@@ -183,7 +213,9 @@ export interface FileRoutesByTo {
   '/offline': typeof OfflineRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/chamada': typeof AuthenticatedChamadaRoute
   '/historico': typeof AuthenticatedHistoricoRoute
+  '/liga': typeof AuthenticatedLigaRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/progresso': typeof AuthenticatedProgressoRoute
   '/pronuncia': typeof AuthenticatedPronunciaRoute
@@ -194,8 +226,10 @@ export interface FileRoutesByTo {
   '/api/tts': typeof ApiTtsRoute
   '/verificar/$codigo': typeof VerificarCodigoRoute
   '/aulas/$id': typeof AuthenticatedAulasIdRoute
+  '/historias/$id': typeof AuthenticatedHistoriasIdRoute
   '/roleplay/$id': typeof AuthenticatedRoleplayIdRoute
   '/aulas': typeof AuthenticatedAulasIndexRoute
+  '/historias': typeof AuthenticatedHistoriasIndexRoute
   '/roleplay': typeof AuthenticatedRoleplayIndexRoute
 }
 export interface FileRoutesById {
@@ -209,7 +243,9 @@ export interface FileRoutesById {
   '/offline': typeof OfflineRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/chamada': typeof AuthenticatedChamadaRoute
   '/_authenticated/historico': typeof AuthenticatedHistoricoRoute
+  '/_authenticated/liga': typeof AuthenticatedLigaRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/progresso': typeof AuthenticatedProgressoRoute
   '/_authenticated/pronuncia': typeof AuthenticatedPronunciaRoute
@@ -220,8 +256,10 @@ export interface FileRoutesById {
   '/api/tts': typeof ApiTtsRoute
   '/verificar/$codigo': typeof VerificarCodigoRoute
   '/_authenticated/aulas/$id': typeof AuthenticatedAulasIdRoute
+  '/_authenticated/historias/$id': typeof AuthenticatedHistoriasIdRoute
   '/_authenticated/roleplay/$id': typeof AuthenticatedRoleplayIdRoute
   '/_authenticated/aulas/': typeof AuthenticatedAulasIndexRoute
+  '/_authenticated/historias/': typeof AuthenticatedHistoriasIndexRoute
   '/_authenticated/roleplay/': typeof AuthenticatedRoleplayIndexRoute
 }
 export interface FileRouteTypes {
@@ -235,7 +273,9 @@ export interface FileRouteTypes {
     | '/offline'
     | '/sitemap.xml'
     | '/admin'
+    | '/chamada'
     | '/historico'
+    | '/liga'
     | '/onboarding'
     | '/progresso'
     | '/pronuncia'
@@ -246,8 +286,10 @@ export interface FileRouteTypes {
     | '/api/tts'
     | '/verificar/$codigo'
     | '/aulas/$id'
+    | '/historias/$id'
     | '/roleplay/$id'
     | '/aulas/'
+    | '/historias/'
     | '/roleplay/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -259,7 +301,9 @@ export interface FileRouteTypes {
     | '/offline'
     | '/sitemap.xml'
     | '/admin'
+    | '/chamada'
     | '/historico'
+    | '/liga'
     | '/onboarding'
     | '/progresso'
     | '/pronuncia'
@@ -270,8 +314,10 @@ export interface FileRouteTypes {
     | '/api/tts'
     | '/verificar/$codigo'
     | '/aulas/$id'
+    | '/historias/$id'
     | '/roleplay/$id'
     | '/aulas'
+    | '/historias'
     | '/roleplay'
   id:
     | '__root__'
@@ -284,7 +330,9 @@ export interface FileRouteTypes {
     | '/offline'
     | '/sitemap.xml'
     | '/_authenticated/admin'
+    | '/_authenticated/chamada'
     | '/_authenticated/historico'
+    | '/_authenticated/liga'
     | '/_authenticated/onboarding'
     | '/_authenticated/progresso'
     | '/_authenticated/pronuncia'
@@ -295,8 +343,10 @@ export interface FileRouteTypes {
     | '/api/tts'
     | '/verificar/$codigo'
     | '/_authenticated/aulas/$id'
+    | '/_authenticated/historias/$id'
     | '/_authenticated/roleplay/$id'
     | '/_authenticated/aulas/'
+    | '/_authenticated/historias/'
     | '/_authenticated/roleplay/'
   fileRoutesById: FileRoutesById
 }
@@ -380,11 +430,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/chamada': {
+      id: '/_authenticated/chamada'
+      path: '/chamada'
+      fullPath: '/chamada'
+      preLoaderRoute: typeof AuthenticatedChamadaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/historico': {
       id: '/_authenticated/historico'
       path: '/historico'
       fullPath: '/historico'
       preLoaderRoute: typeof AuthenticatedHistoricoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/liga': {
+      id: '/_authenticated/liga'
+      path: '/liga'
+      fullPath: '/liga'
+      preLoaderRoute: typeof AuthenticatedLigaRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/onboarding': {
@@ -464,6 +528,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAulasIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/historias/': {
+      id: '/_authenticated/historias/'
+      path: '/historias'
+      fullPath: '/historias/'
+      preLoaderRoute: typeof AuthenticatedHistoriasIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/historias/$id': {
+      id: '/_authenticated/historias/$id'
+      path: '/historias/$id'
+      fullPath: '/historias/$id'
+      preLoaderRoute: typeof AuthenticatedHistoriasIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/roleplay/': {
       id: '/_authenticated/roleplay/'
       path: '/roleplay'
@@ -483,29 +561,37 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedChamadaRoute: typeof AuthenticatedChamadaRoute
   AuthenticatedHistoricoRoute: typeof AuthenticatedHistoricoRoute
+  AuthenticatedLigaRoute: typeof AuthenticatedLigaRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedProgressoRoute: typeof AuthenticatedProgressoRoute
   AuthenticatedPronunciaRoute: typeof AuthenticatedPronunciaRoute
   AuthenticatedTesteRoute: typeof AuthenticatedTesteRoute
   AuthenticatedVocabularioRoute: typeof AuthenticatedVocabularioRoute
   AuthenticatedAulasIdRoute: typeof AuthenticatedAulasIdRoute
+  AuthenticatedHistoriasIdRoute: typeof AuthenticatedHistoriasIdRoute
   AuthenticatedRoleplayIdRoute: typeof AuthenticatedRoleplayIdRoute
   AuthenticatedAulasIndexRoute: typeof AuthenticatedAulasIndexRoute
+  AuthenticatedHistoriasIndexRoute: typeof AuthenticatedHistoriasIndexRoute
   AuthenticatedRoleplayIndexRoute: typeof AuthenticatedRoleplayIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedChamadaRoute: AuthenticatedChamadaRoute,
   AuthenticatedHistoricoRoute: AuthenticatedHistoricoRoute,
+  AuthenticatedLigaRoute: AuthenticatedLigaRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedProgressoRoute: AuthenticatedProgressoRoute,
   AuthenticatedPronunciaRoute: AuthenticatedPronunciaRoute,
   AuthenticatedTesteRoute: AuthenticatedTesteRoute,
   AuthenticatedVocabularioRoute: AuthenticatedVocabularioRoute,
   AuthenticatedAulasIdRoute: AuthenticatedAulasIdRoute,
+  AuthenticatedHistoriasIdRoute: AuthenticatedHistoriasIdRoute,
   AuthenticatedRoleplayIdRoute: AuthenticatedRoleplayIdRoute,
   AuthenticatedAulasIndexRoute: AuthenticatedAulasIndexRoute,
+  AuthenticatedHistoriasIndexRoute: AuthenticatedHistoriasIndexRoute,
   AuthenticatedRoleplayIndexRoute: AuthenticatedRoleplayIndexRoute,
 }
 
