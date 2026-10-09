@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Mail, MessageCircle, ArrowLeft, Zap, Sparkles, Mic, Trophy, WifiOff } from "lucide-react";
-import logoAsset from "@/assets/sergiotech-logo.png.asset.json";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -60,11 +59,9 @@ function AboutPage() {
       <header className="fixed top-0 inset-x-0 z-40 bg-white/90 backdrop-blur border-b border-border pt-[env(safe-area-inset-top)]">
         <div className="mx-auto flex max-w-4xl items-center justify-between gap-3 px-4 py-3">
           <div className="flex min-w-0 items-center gap-2">
-            <img
-              src={logoAsset.url}
-              alt="SérgioTech"
-              className="h-9 w-9 object-contain"
-            />
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground text-lg font-bold">
+              S
+            </span>
             <span className="font-bold text-foreground tracking-tight">
               Sérgio<span className="text-primary">Tech</span>
             </span>
@@ -123,11 +120,14 @@ function AboutPage() {
 
         {/* Autor */}
         <section className="mt-10 flex flex-col items-center text-center">
-          <img
-            src={logoAsset.url}
-            alt="Logótipo SérgioTech"
-            className="w-44 sm:w-52 object-contain drop-shadow-sm"
-          />
+          <div className="flex items-center gap-3">
+            <span className="grid h-14 w-14 place-items-center rounded-2xl bg-primary text-primary-foreground text-2xl font-bold shadow-sm">
+              S
+            </span>
+            <span className="text-3xl font-bold tracking-tight text-foreground">
+              Sérgio<span className="text-primary">Tech</span>
+            </span>
+          </div>
           <h2 className="mt-3 text-xl font-bold tracking-tight">Sérgio João</h2>
           <p className="mt-1 text-primary font-medium text-sm inline-flex items-center gap-1.5">
             <Zap className="h-4 w-4" />
