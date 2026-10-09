@@ -78,6 +78,13 @@
       "when": 1791476544292,
       "tag": "0010_secure_certificate_issuance",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1791549160615,
+      "tag": "0011_weekly_league",
+      "breakpoints": true
     }
   ]
 }
