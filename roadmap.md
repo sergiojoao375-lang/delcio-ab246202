@@ -10,3 +10,10 @@
 - [x] Respostas rápidas + modo bilíngue para iniciantes
 - [x] Tocar na palavra para traduzir + áudio lento 0.75x
 - [x] Guardar aulas para estudar offline
+- [x] Continuidade: copiar o código para esta conta e ligar o Lovable Cloud
+- [x] Continuidade: recriar base de dados (tabelas, funções, armazenamento de áudio)
+- [x] Continuidade: ativar entrada com e-mail e Google
+- [x] Continuidade: verificar plano, conversa, aulas guardadas, palavras, certificado
+- [ ] Continuidade: recuperar o logótipo original da SérgioTech (ficheiro não veio na cópia)
+- [ ] Continuidade: publicar e ligar um domínio próprio
+
