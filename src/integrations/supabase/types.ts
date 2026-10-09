@@ -124,6 +124,33 @@ export type Database = {
         }
         Relationships: []
       }
+      league_members: {
+        Row: {
+          division: number
+          prev_division: number | null
+          prev_week: string | null
+          updated_at: string
+          user_id: string
+          week_start: string
+        }
+        Insert: {
+          division?: number
+          prev_division?: number | null
+          prev_week?: string | null
+          updated_at?: string
+          user_id: string
+          week_start?: string
+        }
+        Update: {
+          division?: number
+          prev_division?: number | null
+          prev_week?: string | null
+          updated_at?: string
+          user_id?: string
+          week_start?: string
+        }
+        Relationships: []
+      }
       learner_profiles: {
         Row: {
           created_at: string
@@ -398,6 +425,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_weekly_league: { Args: never; Returns: Json }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
