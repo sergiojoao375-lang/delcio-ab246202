@@ -6,7 +6,7 @@ const KEY = "delcio.reminder";
 type Cfg = { enabled: boolean; time: string; lastShown?: string };
 
 const MESSAGES = [
-  "O Professor Delcio está à tua espera para uns minutinhos de conversa! 🔥",
+  "🔥 O Delcio está à tua espera para os minutos de hoje!",
   "Hora do inglês! Não deixes a tua ofensiva apagar. 💪",
   "5 minutos hoje já fazem diferença. Vamos praticar? 🇬🇧",
 ];

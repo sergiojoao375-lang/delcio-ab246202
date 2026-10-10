@@ -16,6 +16,8 @@ import {
 import { getCertificateStatus, getMyCertificate, issueMyCertificate } from "@/lib/certificate.functions";
 import { CourseCertificate, type CertificateDetails } from "@/components/course-certificate";
 import { Button } from "@/components/ui/button";
+import { WeeklyReportCard } from "@/components/weekly-report";
+import { StudyReminders } from "@/components/study-reminders";
 
 const learnerQuery = queryOptions({ queryKey: ["learner"], queryFn: () => getLearner() });
 const historyQuery = queryOptions({ queryKey: ["testHistory"], queryFn: () => listTestHistory() });
@@ -167,6 +169,9 @@ function ProgressPage() {
             </p>
           </div>
         </section>
+
+        <WeeklyReportCard />
+        <StudyReminders />
 
         <section className="rounded-2xl border border-border bg-card p-5">
           <h2 className="flex items-center gap-2 font-semibold text-primary-dark">

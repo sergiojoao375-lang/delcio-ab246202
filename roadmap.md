@@ -17,3 +17,8 @@
 - [ ] Continuidade: recuperar o logótipo original da SérgioTech (ficheiro não veio na cópia)
 - [ ] Continuidade: publicar e ligar um domínio próprio
 
+
+- [x] Chamada com o Delcio (mãos-livres)
+- [x] Liga semanal com divisões
+- [x] Histórias interativas em áudio
+- [x] Lembretes diários + boletim semanal no Progresso

@@ -250,7 +250,7 @@ function CallPage() {
             <PhoneOff className="h-8 w-8" />
           </button>
         ) : (
-          <button onClick={() => void call()} aria-label="Ligar ao Delcio" className="flex h-20 w-20 items-center justify-center rounded-full bg-success text-primary-foreground">
+          <button onClick={() => void call()} aria-label="Ligar ao Delcio" className="flex h-20 w-20 items-center justify-center rounded-full bg-primary text-primary-foreground ring-4 ring-primary-foreground/20">
             <Phone className="h-8 w-8" />
           </button>
         )}

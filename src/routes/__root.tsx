@@ -12,6 +12,7 @@ import {
 import appCss from "../styles.css?url";
 import { registerServiceWorker } from "@/lib/register-sw";
 import { OfflineIndicator } from "@/components/offline-indicator";
+import { ReminderScheduler } from "@/components/study-reminders";
 
 
 function NotFoundComponent() {
@@ -160,6 +161,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <OfflineIndicator />
+      <ReminderScheduler />
       <Outlet />
     </QueryClientProvider>
   );
