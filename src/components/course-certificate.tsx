@@ -92,7 +92,12 @@ export function CourseCertificate({ details }: { details: CertificateDetails }) 
 
         <footer className="grid w-full grid-cols-[1fr_auto_1fr] items-end gap-3 sm:gap-8">
           <div className="min-w-0 text-center font-certificate-body">
-            <p className="font-certificate-heading text-lg font-bold italic text-certificate-green">Delcio João</p>
+            <p
+              className="font-certificate-signature -mb-3 -rotate-6 text-5xl leading-none text-certificate-ink/85"
+              aria-label="Assinatura de Delcio João"
+            >
+              Delcio João
+            </p>
             <div className="mx-auto mt-1 h-px max-w-40 bg-certificate-green/60" />
             <p className="mt-1 text-[9px] font-semibold uppercase text-certificate-muted">Direção académica</p>
           </div>
