@@ -46,6 +46,7 @@
   --color-certificate-qr: var(--certificate-qr);
   --font-certificate-heading: "Libre Baskerville", Georgia, serif;
   --font-certificate-body: "IBM Plex Sans", ui-sans-serif, sans-serif;
+  --font-certificate-signature: "Mrs Saint Delafield", cursive;
   --shadow-certificate: 0 20px 50px color-mix(in oklab, var(--certificate-green) 25%, transparent);
 }
 
