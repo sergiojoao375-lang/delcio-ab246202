@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Clock, GraduationCap, Loader2 } from "lucide-react";
+import { StudyReminders } from "@/components/study-reminders";
 import { getLearner, saveOnboarding } from "@/lib/learning.functions";
 import {
   DAILY_GOALS,
@@ -134,6 +135,8 @@ function OnboardingPage() {
             </p>
           )}
         </section>
+
+        <StudyReminders />
 
         {err && <p className="text-sm text-destructive">{err}</p>}
 

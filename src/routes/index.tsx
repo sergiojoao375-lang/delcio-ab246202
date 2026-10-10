@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Mic, Send, Languages, RefreshCcw, Flame, Trophy, Sparkles, PartyPopper, Star, Crown, Play, Volume2, Menu, BookOpen, MessagesSquare, SpellCheck, TrendingUp, History, Settings, Info, LogIn, LogOut } from "lucide-react";
+import { Mic, Send, Languages, RefreshCcw, Flame, Trophy, Sparkles, PartyPopper, Star, Crown, Play, Volume2, Menu, BookOpen, MessagesSquare, SpellCheck, TrendingUp, History, Settings, Info, LogIn, LogOut, Phone, Headphones, Medal } from "lucide-react";
 import { VOICES, DEFAULT_VOICE_ID, getVoice } from "@/lib/voices";
 import { SpeakingAvatar } from "@/components/speaking-avatar";
 import { fetchWithRetry } from "@/lib/api-client";
@@ -941,6 +941,9 @@ function Index() {
                 <Link to="/roleplay" className="shrink-0 bg-white/10 hover:bg-white/20 transition rounded-full px-2 sm:px-3 py-1 text-[11px] sm:text-[12px] font-medium">Cenários</Link>
                 <Link to="/vocabulario" className="shrink-0 bg-white/10 hover:bg-white/20 transition rounded-full px-2 sm:px-3 py-1 text-[11px] sm:text-[12px] font-medium">Palavras</Link>
                 <Link to="/pronuncia" className="shrink-0 bg-white/10 hover:bg-white/20 transition rounded-full px-2 sm:px-3 py-1 text-[11px] sm:text-[12px] font-medium">Pronúncia</Link>
+                <Link to="/chamada" className="shrink-0 bg-white/10 hover:bg-white/20 transition rounded-full px-2 sm:px-3 py-1 text-[11px] sm:text-[12px] font-medium">Chamada</Link>
+                <Link to="/historias" className="shrink-0 bg-white/10 hover:bg-white/20 transition rounded-full px-2 sm:px-3 py-1 text-[11px] sm:text-[12px] font-medium">Histórias</Link>
+                <Link to="/liga" className="shrink-0 bg-white/10 hover:bg-white/20 transition rounded-full px-2 sm:px-3 py-1 text-[11px] sm:text-[12px] font-medium">Liga</Link>
               </>
             )}
             {learner && (
@@ -1013,6 +1016,9 @@ function Index() {
                     { to: "/roleplay" as const, label: "Cenários", icon: MessagesSquare, show: signedIn },
                     { to: "/vocabulario" as const, label: "Palavras", icon: Star, show: signedIn },
                     { to: "/pronuncia" as const, label: "Pronúncia", icon: SpellCheck, show: signedIn },
+                    { to: "/chamada" as const, label: "Chamada com o Delcio", icon: Phone, show: signedIn },
+                    { to: "/historias" as const, label: "Histórias em áudio", icon: Headphones, show: signedIn },
+                    { to: "/liga" as const, label: "Liga semanal", icon: Medal, show: signedIn },
                     { to: "/progresso" as const, label: "Progresso", icon: TrendingUp, show: signedIn },
                     { to: "/historico" as const, label: "Histórico", icon: History, show: signedIn },
                     { to: "/offline" as const, label: "Aulas guardadas", icon: BookOpen, show: true },
