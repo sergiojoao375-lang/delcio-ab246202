@@ -93,15 +93,15 @@ export function CourseCertificate({ details }: { details: CertificateDetails }) 
         <footer className="grid w-full grid-cols-[1fr_auto_1fr] items-end gap-3 sm:gap-8">
           <div className="min-w-0 text-center font-certificate-body">
             <div
-              className="relative -mb-2 mx-auto inline-block -rotate-6 select-none"
+              className="relative mx-auto w-44 -rotate-6 select-none pt-2"
               role="img"
               aria-label="Rubrica de Delcio João"
             >
-              <span className="font-certificate-signature block text-[4.25rem] leading-[0.78] tracking-[-0.08em] text-certificate-ink/85">
+              <span className="font-certificate-signature block text-center text-[4.25rem] leading-[0.85] tracking-[-0.08em] text-certificate-ink/85">
                 D<span className="-ml-3">J</span>
               </span>
               <svg
-                className="pointer-events-none absolute -bottom-3 left-1/2 h-8 w-[150%] -translate-x-1/2 overflow-visible"
+                className="pointer-events-none -mt-5 block w-full overflow-visible"
                 viewBox="0 0 200 32"
                 fill="none"
                 aria-hidden="true"
