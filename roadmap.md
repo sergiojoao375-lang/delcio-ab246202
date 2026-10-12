@@ -1,5 +1,8 @@
 # Roadmap
 
+- [x] Corrigir o corte inferior do certificado
+- [ ] Ocultar o selo Lovable — bloqueado: requer papel de editor num plano Pro ou superior
+
 - [x] Corrigir a navegação do menu no telefone
 - [x] Adicionar exame final e emissão segura do certificado
 - [x] Criar certificado imprimível com QR e página pública de verificação

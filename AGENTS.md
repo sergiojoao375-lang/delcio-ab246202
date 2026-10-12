@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 - Vocabulary flashcards are created server-side in addMessage when an assistant message has a correction — keeps the word bank automatic.
 - Course certificates are issued only through the authenticated database function after a passed final exam, and public verification exposes only certificate fields.
+- Certificate previews measure the full document height before scaling to their container, so signatures and verification details are never clipped.
