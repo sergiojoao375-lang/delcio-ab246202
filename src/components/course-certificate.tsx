@@ -92,14 +92,46 @@ export function CourseCertificate({ details }: { details: CertificateDetails }) 
 
         <footer className="grid w-full grid-cols-[1fr_auto_1fr] items-end gap-3 sm:gap-8">
           <div className="min-w-0 text-center font-certificate-body">
-            <p
-              className="font-certificate-signature -mb-3 -rotate-6 text-5xl leading-none text-certificate-ink/85"
-              aria-label="Assinatura de Delcio João"
+            <div
+              className="relative mx-auto w-44 -rotate-6 select-none pt-2"
+              role="img"
+              aria-label="Rubrica de Delcio João"
             >
-              Delcio João
-            </p>
+              <span className="font-certificate-signature block text-center text-[4.25rem] leading-[0.85] tracking-[-0.08em] text-certificate-ink/85">
+                D<span className="-ml-3">J</span>
+              </span>
+              <svg
+                className="pointer-events-none -mt-5 block w-full overflow-visible"
+                viewBox="0 0 200 32"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M8 22C42 6 78 30 112 14c22-10 54-9 80 3"
+                  stroke="currentColor"
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  className="text-certificate-ink/70"
+                />
+                <path
+                  d="M22 28c48 5 118 1 160-6"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  className="text-certificate-ink/40"
+                />
+                <path
+                  d="M168 4c8 3 12 8 13 14"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  className="text-certificate-ink/55"
+                />
+              </svg>
+            </div>
             <div className="mx-auto mt-1 h-px max-w-40 bg-certificate-green/60" />
-            <p className="mt-1 text-[9px] font-semibold uppercase text-certificate-muted">Direção académica</p>
+            <p className="mt-1 text-[10px] font-semibold uppercase text-certificate-muted">Delcio João</p>
+            <p className="text-[9px] font-semibold uppercase text-certificate-muted">Direção académica</p>
           </div>
 
           <div className="relative flex flex-col items-center pb-1">
