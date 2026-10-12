@@ -23,20 +23,27 @@ export function CourseCertificate({ details }: { details: CertificateDetails }) 
   }).format(new Date(details.issuedAt));
 
   const boxRef = useRef<HTMLDivElement>(null);
+  const certificateRef = useRef<HTMLElement>(null);
   const [scale, setScale] = useState(1);
+  const [height, setHeight] = useState(538);
   useEffect(() => {
     const el = boxRef.current;
-    if (!el) return;
-    const update = () => setScale(Math.min(1, el.clientWidth / 760));
+    const certificate = certificateRef.current;
+    if (!el || !certificate) return;
+    const update = () => {
+      setScale(Math.min(1, el.clientWidth / 760));
+      setHeight(certificate.offsetHeight);
+    };
     update();
     const ro = new ResizeObserver(update);
     ro.observe(el);
+    ro.observe(certificate);
     return () => ro.disconnect();
   }, []);
 
   return (
-    <div ref={boxRef} className="certificate-viewport w-full" style={{ ["--cert-scale" as string]: scale }}>
-    <article className="certificate relative aspect-[1.414/1] w-full min-w-[760px] overflow-hidden bg-certificate-paper p-4 text-center text-certificate-ink shadow-certificate">
+    <div ref={boxRef} className="certificate-viewport w-full" style={{ ["--cert-scale" as string]: scale, ["--cert-height" as string]: `${height}px` }}>
+    <article ref={certificateRef} className="certificate relative min-h-[538px] w-full min-w-[760px] overflow-hidden bg-certificate-paper p-4 text-center text-certificate-ink shadow-certificate">
       <div className="certificate-grain absolute inset-0" aria-hidden="true" />
       <div className="absolute inset-3 border-[5px] border-double border-certificate-copper sm:inset-4 sm:border-[8px]" aria-hidden="true" />
       <div className="absolute inset-5 border border-certificate-green/70 sm:inset-7" aria-hidden="true" />
@@ -50,7 +57,7 @@ export function CourseCertificate({ details }: { details: CertificateDetails }) 
         <ShieldCheck className="h-72 w-72 sm:h-96 sm:w-96" strokeWidth={0.7} />
       </div>
 
-      <div className="relative z-10 flex h-full flex-col items-center px-16 py-10">
+      <div className="relative z-10 flex flex-col items-center px-16 py-10">
         <header className="flex flex-col items-center">
           <div className="grid h-16 w-16 place-items-center rounded-full border border-certificate-copper bg-certificate-green text-certificate-paper shadow-sm">
             <Feather className="h-8 w-8" strokeWidth={1.8} />
