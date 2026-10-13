@@ -85,6 +85,13 @@
       "when": 1791549160615,
       "tag": "0011_weekly_league",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1791901003908,
+      "tag": "0012_certificate_identity_document",
+      "breakpoints": true
     }
   ]
 }
