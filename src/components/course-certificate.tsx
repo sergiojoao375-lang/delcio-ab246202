@@ -12,6 +12,8 @@ export type CertificateDetails = {
   verificationCode: string;
   verificationUrl: string;
   sample?: boolean;
+  idDocumentType?: "bi" | "passport" | null;
+  idDocumentNumber?: string | null;
 };
 
 export function CourseCertificate({ details }: { details: CertificateDetails }) {
@@ -91,6 +93,11 @@ export function CourseCertificate({ details }: { details: CertificateDetails }) 
               {details.fullName}
             </p>
           </div>
+          {details.idDocumentNumber && (
+            <p className="mt-2 font-certificate-body text-xs font-semibold uppercase text-certificate-muted">
+              Portador(a) do {details.idDocumentType === "passport" ? "Passaporte" : "Bilhete de Identidade"} n.º {details.idDocumentNumber}
+            </p>
+          )}
           <p className="mx-auto mt-3 max-w-2xl font-certificate-body text-sm font-medium leading-relaxed text-certificate-muted">
             concluiu com mérito todos os módulos e requisitos do <strong className="font-semibold text-certificate-ink">{details.courseTitle}</strong>,
             demonstrando proficiência no nível <strong className="font-semibold text-certificate-ink">{level}</strong> e alcançando a classificação final de <strong className="font-semibold text-certificate-ink">{details.finalScore}/100</strong>.

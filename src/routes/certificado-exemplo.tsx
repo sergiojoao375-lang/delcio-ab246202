@@ -35,6 +35,8 @@ function CertificateExamplePage() {
           verificationCode: "EXEMPLO-DEMONSTRATIVO",
           verificationUrl,
           sample: true,
+          idDocumentType: "bi",
+          idDocumentNumber: "004567891LA042",
         }} />
         <p className="mt-4 text-center text-sm text-muted-foreground print:hidden">
           O certificado oficial será liberado depois da aprovação no exame final e terá um QR de validação único.

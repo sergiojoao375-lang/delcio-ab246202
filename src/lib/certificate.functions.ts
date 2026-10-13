@@ -3,6 +3,12 @@ import { createClient } from "@supabase/supabase-js";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import type { Database } from "@/integrations/supabase/types";
 
+export const CERTIFICATE_DELAY_MS = 24 * 60 * 60 * 1000;
+
+export function isCertificateAvailable(issuedAt: string, now = Date.now()) {
+  return now >= new Date(issuedAt).getTime() + CERTIFICATE_DELAY_MS;
+}
+
 function mapCertificate(row: any) {
   return {
     id: row.id as string,
@@ -12,6 +18,9 @@ function mapCertificate(row: any) {
     level: row.level as string,
     finalScore: row.final_score as number,
     issuedAt: row.issued_at as string,
+    idDocumentType: (row.id_document_type ?? null) as "bi" | "passport" | null,
+    idDocumentNumber: (row.id_document_number ?? null) as string | null,
+    availableAt: new Date(new Date(row.issued_at).getTime() + CERTIFICATE_DELAY_MS).toISOString(),
   };
 }
 
@@ -20,7 +29,7 @@ export const getMyCertificate = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const { data, error } = await context.supabase
       .from("course_certificates")
-      .select("id, verification_code, full_name, course_title, level, final_score, issued_at")
+      .select("id, verification_code, full_name, course_title, level, final_score, issued_at, id_document_type, id_document_number")
       .eq("user_id", context.userId)
       .maybeSingle();
     if (error) throw new Error(error.message);
@@ -45,12 +54,17 @@ export const getCertificateStatus = createServerFn({ method: "GET" })
 
 export const issueMyCertificate = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d: { fullName: string }) => d)
+  .inputValidator((d: { fullName: string; idDocumentType: "bi" | "passport"; idDocumentNumber: string }) => d)
   .handler(async ({ data, context }) => {
     const fullName = data.fullName.trim().replace(/\s+/g, " ");
     if (fullName.length < 2 || fullName.length > 100) throw new Error("Confirme o seu nome completo.");
+    if (data.idDocumentType !== "bi" && data.idDocumentType !== "passport") throw new Error("Escolha Bilhete de Identidade ou Passaporte.");
+    const doc = data.idDocumentNumber.replace(/\s+/g, "").toUpperCase();
+    if (!/^[A-Z0-9-]{5,20}$/.test(doc)) throw new Error("Indique um número de documento válido (5 a 20 letras ou números).");
     const { data: row, error } = await context.supabase.rpc("issue_course_certificate", {
       _full_name: fullName,
+      _id_document_type: data.idDocumentType,
+      _id_document_number: doc,
     });
     if (error) throw new Error(error.message);
     return mapCertificate(row);

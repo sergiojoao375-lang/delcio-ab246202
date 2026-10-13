@@ -13,7 +13,7 @@ import {
   estimatedMonths,
   type Level,
 } from "@/lib/levels";
-import { getCertificateStatus, getMyCertificate, issueMyCertificate } from "@/lib/certificate.functions";
+import { getCertificateStatus, getMyCertificate, issueMyCertificate, isCertificateAvailable } from "@/lib/certificate.functions";
 import { CourseCertificate, type CertificateDetails } from "@/components/course-certificate";
 import { Button } from "@/components/ui/button";
 import { WeeklyReportCard } from "@/components/weekly-report";
@@ -74,6 +74,8 @@ function ProgressPage() {
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
   const [certificateName, setCertificateName] = useState(certificateStatus.suggestedName);
+  const [docType, setDocType] = useState<"bi" | "passport">("bi");
+  const [docNumber, setDocNumber] = useState("");
 
   useEffect(() => {
     if (!certificateName && certificateStatus.suggestedName) setCertificateName(certificateStatus.suggestedName);
@@ -83,7 +85,7 @@ function ProgressPage() {
     setBusy(true);
     setNotice(null);
     try {
-      await issueMyCertificate({ data: { fullName: certificateName } });
+      await issueMyCertificate({ data: { fullName: certificateName, idDocumentType: docType, idDocumentNumber: docNumber } });
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: ["certificate"] }),
         queryClient.invalidateQueries({ queryKey: ["certificateStatus"] }),
@@ -265,7 +267,12 @@ function ProgressPage() {
 
         <section className="rounded-2xl border border-border bg-card p-5">
           <h2 className="flex items-center gap-2 font-semibold text-primary-dark"><Award className="h-5 w-5 text-primary" /> Certificado final</h2>
-          {certificate ? (
+          {certificate && !isCertificateAvailable(certificate.issuedAt) ? (
+            <div className="mt-3 rounded-xl border border-primary/30 bg-accent p-4 text-sm text-accent-foreground">
+              <p className="font-semibold">Pedido recebido com sucesso! 🎉</p>
+              <p className="mt-1">O seu certificado estará disponível dentro de 24 horas, a partir de {new Intl.DateTimeFormat("pt-PT", { dateStyle: "long", timeStyle: "short" }).format(new Date(certificate.availableAt))}. Volte a esta página para o ver e imprimir.</p>
+            </div>
+          ) : certificate ? (
             <div className="mt-4">
               <CourseCertificate details={{
                 fullName: certificate.fullName,
@@ -274,6 +281,8 @@ function ProgressPage() {
                 finalScore: certificate.finalScore,
                 issuedAt: certificate.issuedAt,
                 verificationCode: certificate.verificationCode,
+                idDocumentType: certificate.idDocumentType,
+                idDocumentNumber: certificate.idDocumentNumber,
                 verificationUrl: `${window.location.origin}/verificar/${certificate.verificationCode}`,
               }} />
               <Button className="mt-4" onClick={() => window.print()}><Printer /> Imprimir ou guardar em PDF</Button>
@@ -282,7 +291,16 @@ function ProgressPage() {
             <div className="mt-3 max-w-md">
               <label htmlFor="certificate-name" className="text-sm font-medium">Confirme o nome que aparecerá no certificado</label>
               <input id="certificate-name" value={certificateName} onChange={(e) => setCertificateName(e.target.value)} maxLength={100} className="mt-2 w-full rounded-xl border border-input bg-background px-3 py-2" />
-              <Button className="mt-3" disabled={busy || certificateName.trim().length < 2} onClick={() => void issueCertificate()}>{busy && <Loader2 className="animate-spin" />} Emitir certificado</Button>
+              <p className="mt-4 text-sm font-medium">Documento de identificação</p>
+              <div className="mt-2 flex gap-2">
+                {([["bi", "Bilhete de Identidade"], ["passport", "Passaporte"]] as const).map(([v, l]) => (
+                  <button key={v} type="button" onClick={() => setDocType(v)} className={`rounded-xl border px-3 py-2 text-sm ${docType === v ? "border-primary bg-primary text-primary-foreground" : "border-input hover:bg-accent"}`}>{l}</button>
+                ))}
+              </div>
+              <label htmlFor="certificate-doc" className="mt-3 block text-sm font-medium">Número do {docType === "bi" ? "Bilhete de Identidade" : "Passaporte"}</label>
+              <input id="certificate-doc" value={docNumber} onChange={(e) => setDocNumber(e.target.value)} maxLength={20} className="mt-2 w-full rounded-xl border border-input bg-background px-3 py-2 uppercase" />
+              <p className="mt-2 text-xs text-muted-foreground">Confirme os dados com atenção: depois de emitido, o certificado não pode ser alterado. Ficará disponível dentro de 24 horas.</p>
+              <Button className="mt-3" disabled={busy || certificateName.trim().length < 2 || docNumber.replace(/\s+/g, "").length < 5} onClick={() => void issueCertificate()}>{busy && <Loader2 className="animate-spin" />} Emitir certificado</Button>
             </div>
           ) : (
             <p className="mt-2 text-sm text-muted-foreground">Será liberado quando você concluir o nível Avançado e for aprovado no exame final.</p>
