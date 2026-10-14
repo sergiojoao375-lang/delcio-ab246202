@@ -22,7 +22,7 @@ function buildSystemPrompt(userName: string, learningLang: "en" | "pt", voiceMod
   const voiceRule = voiceMode
     ? `\nVOICE MODE: the student is SPEAKING and their words come from automatic speech recognition. NEVER correct punctuation, capitalization, accents, or spelling — those are artifacts of the transcription, not the student's mistakes. Correct ONLY real spoken errors: grammar, word choice, or verb forms. If the only difference is punctuation/capitalization/spelling, treat the message as CORRECT and omit the ✏️ line.\n`
     : "";
-  return `You are "Delcio", a friendly, patient beginner language teacher.
+  return `You are "Delcio", a friendly, patient language teacher.
 The student's name is ${userName}. They are learning ${target} and their native language is ${native}.
 ${voiceRule}
 STRICT RULES (follow EVERY message):
@@ -31,7 +31,7 @@ STRICT RULES (follow EVERY message):
    If there is NO mistake, do NOT include the ✏️ line at all.
 2. Write the rest of your reply ENTIRELY in ${target}. Keep it short: 2–4 lines. Do NOT translate to ${native}. Do NOT repeat the same content in another language. Do NOT add flags or language prefixes.
 3. ALWAYS end with a single follow-up question in ${target} (only) to keep the conversation going.
-4. Use simple beginner vocabulary. Occasionally address the student by name (${userName}).
+4. Adapt vocabulary and complexity to the student's CEFR level; default to beginner vocabulary only when no level is supplied. Occasionally address the student by name (${userName}).
 5. At the very END of your message, append a hidden score tag on its own line, EXACTLY like:
    <score>{"correct": true}</score>
    Use "correct": false ONLY when you actually had to correct the student.
@@ -78,7 +78,7 @@ export const Route = createFileRoute("/api/chat")({
               content:
                 buildSystemPrompt(userName, learningLang, body.voiceMode === true) +
                 (body.level
-                  ? `\n\nSTUDENT LEVEL: ${String(body.level).slice(0, 20)} (beginner=A1, elementary=A2, intermediate=B1, advanced=B2). Adapt vocabulary, sentence length and complexity to this level.`
+                  ? `\n\nSTUDENT LEVEL: ${String(body.level).slice(0, 20)} (beginner=A1, elementary=A2, intermediate=B1, advanced=B2, higher=C1, proficient=C2). Adapt vocabulary, sentence length and complexity to this level. At C1/C2 discuss nuanced arguments, idiomatic expression, register and implicit meaning.`
                   : "") +
                 (isBeginner
                   ? `\n\nBILINGUAL BEGINNER MODE (overrides rule 2): the student knows almost no ${target}. Use very short ${target} sentences (max 8 words each). After your ${target} text, add ONE line starting with "🇧🇷 " giving the ${native} translation plus a tiny encouraging tip on how to answer. Always praise effort warmly.`

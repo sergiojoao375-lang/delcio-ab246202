@@ -92,6 +92,13 @@
       "when": 1791901003908,
       "tag": "0012_certificate_identity_document",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1791990013919,
+      "tag": "0013_certificate_requires_c2",
+      "breakpoints": true
     }
   ]
 }

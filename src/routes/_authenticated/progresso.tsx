@@ -261,7 +261,7 @@ function ProgressPage() {
             </>
           ) : (
             <><p className="mt-1 text-sm text-muted-foreground">Você chegou ao nível mais alto. Agora faça o exame final para concluir o curso.</p>
-            {!certificateStatus.finalPassed && <Button className="mt-4" onClick={() => navigate({ to: "/teste", search: { kind: "final" } })}>Fazer exame final</Button>}</>
+            {certificateStatus.eligibleForFinal && !certificateStatus.finalPassed && <Button className="mt-4" onClick={() => navigate({ to: "/teste", search: { kind: "final" } })}>Fazer exame final C2</Button>}</>
           )}
         </section>
 
@@ -303,7 +303,7 @@ function ProgressPage() {
               <Button className="mt-3" disabled={busy || certificateName.trim().length < 2 || docNumber.replace(/\s+/g, "").length < 5} onClick={() => void issueCertificate()}>{busy && <Loader2 className="animate-spin" />} Emitir certificado</Button>
             </div>
           ) : (
-            <p className="mt-2 text-sm text-muted-foreground">Será liberado quando você concluir o nível Avançado e for aprovado no exame final.</p>
+            <p className="mt-2 text-sm text-muted-foreground">Disponível após concluir o nível Proficiente (C2) e passar o exame final C2. O percurso completo inclui A1, A2, B1, B2, C1 e C2.</p>
           )}
           <Link to="/certificado-exemplo" className="mt-3 inline-block text-sm font-medium text-primary hover:underline">Ver um exemplar do certificado</Link>
         </section>

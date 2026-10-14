@@ -10,6 +10,8 @@ import {
   dailyGoalXp,
   levelXpRequired,
   nextLevel,
+  canTakeFinalExam,
+  isC2FinalExam,
   type Level,
 } from "@/lib/levels";
 
@@ -426,12 +428,14 @@ export const startTest = createServerFn({ method: "POST" })
       target = status.nextLevel;
       if (!target) return { started: false as const, reason: "max_level" as const, status };
     } else if (data.kind === "final") {
-      if (level !== "advanced") return { started: false as const, reason: "locked" as const, status };
+      if (!canTakeFinalExam(level, profile.placement_done === true)) return { started: false as const, reason: "locked" as const, status };
       const { data: passedFinal } = await supabase
         .from("level_tests")
         .select("id")
         .eq("user_id", userId)
         .eq("kind", "final")
+        .eq("from_level", "proficient")
+        .eq("to_level", "proficient")
         .eq("status", "done")
         .eq("passed", true)
         .limit(1)
@@ -445,6 +449,7 @@ export const startTest = createServerFn({ method: "POST" })
       `You are an English ${data.kind === "final" ? "course completion" : "placement"} examiner for Brazilian-Portuguese speakers.
 Build a short practical test with EXACTLY 6 questions: 2 reading (each with a short "passage" and a comprehension question), 2 grammar (fill-in / fix the sentence), 2 conversation (an open prompt the student answers in 1-3 English sentences).
 All prompts in English, instructions may include a short Portuguese hint. Calibrate difficulty to the target level.
+CEFR mapping: beginner=A1, elementary=A2, intermediate=B1, advanced=B2, higher=C1, proficient=C2. C1 tests assess inference, nuanced arguments and complex grammar. C2 tests assess subtle meaning, idiomatic precision, register and sophisticated synthesis; do not use beginner questions for C1 or C2. Use European Portuguese for any hints.
 Reply ONLY with JSON: {"questions":[{"skill":"reading"|"grammar"|"conversation","passage":"optional","prompt":"...","expected":"expected answer or key points"}]}`,
       JSON.stringify({
         kind: data.kind,
@@ -495,6 +500,12 @@ export const submitTest = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     if (!test) throw new Error("Teste não encontrado.");
     if (test.status === "done") throw new Error("Este teste já foi corrigido.");
+    if (test.kind === "final") {
+      const current = await loadOrCreateProfile(supabase, userId);
+      if (!isC2FinalExam(test) || !canTakeFinalExam(current.level, current.placement_done === true)) {
+        throw new Error("O exame final exige o nível Proficiente (C2). Inicie um novo exame depois de atingir esse nível.");
+      }
+    }
 
     const questions = (test.questions ?? []) as TestQuestion[];
     const answered = questions.map((q) => ({
@@ -508,8 +519,8 @@ export const submitTest = createServerFn({ method: "POST" })
     const result = await askAI(
       `You grade an English test for a Brazilian-Portuguese speaker.
 Score each skill 0-100 and give an overall score 0-100. Be strict but fair; ignore punctuation and accents.
-Also state the CEFR-mapped level the student really belongs to, from: beginner, elementary, intermediate, advanced.
-Reply ONLY with JSON: {"score":0-100,"reading":0-100,"grammar":0-100,"conversation":0-100,"recommendedLevel":"beginner|elementary|intermediate|advanced","feedback":"3-5 sentences in Portuguese with what to improve"}`,
+Also state the CEFR-mapped level the student really belongs to: beginner=A1, elementary=A2, intermediate=B1, advanced=B2, higher=C1, proficient=C2. Grade against the target CEFR level, requiring nuance, precision and appropriate register at C1/C2.
+Reply ONLY with JSON: {"score":0-100,"reading":0-100,"grammar":0-100,"conversation":0-100,"recommendedLevel":"beginner|elementary|intermediate|advanced|higher|proficient","feedback":"3-5 sentences in European Portuguese with what to improve"}`,
       JSON.stringify({
         kind: test.kind,
         fromLevel: test.from_level,

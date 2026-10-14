@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Award, CheckCircle2, Feather, ShieldCheck } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
-import { LEVEL_LABEL, type Level } from "@/lib/levels";
+import { LEVEL_ENGLISH_LABEL, type Level } from "@/lib/levels";
 
 export type CertificateDetails = {
   fullName: string;
@@ -17,8 +17,9 @@ export type CertificateDetails = {
 };
 
 export function CourseCertificate({ details }: { details: CertificateDetails }) {
-  const level = LEVEL_LABEL[details.level as Level] ?? details.level;
-  const date = new Intl.DateTimeFormat("pt-PT", {
+  const level = LEVEL_ENGLISH_LABEL[details.level as Level] ?? details.level;
+  const courseTitle = details.courseTitle === "Curso Completo de Inglês" ? "Complete English Course" : details.courseTitle;
+  const date = new Intl.DateTimeFormat("en-GB", {
     day: "2-digit",
     month: "long",
     year: "numeric",
@@ -45,7 +46,7 @@ export function CourseCertificate({ details }: { details: CertificateDetails }) 
 
   return (
     <div ref={boxRef} className="certificate-viewport w-full" style={{ ["--cert-scale" as string]: scale, ["--cert-height" as string]: `${height}px` }}>
-    <article ref={certificateRef} className="certificate relative min-h-[538px] w-full min-w-[760px] overflow-hidden bg-certificate-paper p-4 text-center text-certificate-ink shadow-certificate">
+    <article lang="en" ref={certificateRef} className="certificate relative min-h-[538px] w-full min-w-[760px] overflow-hidden bg-certificate-paper p-4 text-center text-certificate-ink shadow-certificate">
       <div className="certificate-grain absolute inset-0" aria-hidden="true" />
       <div className="absolute inset-3 border-[5px] border-double border-certificate-copper sm:inset-4 sm:border-[8px]" aria-hidden="true" />
       <div className="absolute inset-5 border border-certificate-green/70 sm:inset-7" aria-hidden="true" />
@@ -65,28 +66,28 @@ export function CourseCertificate({ details }: { details: CertificateDetails }) 
             <Feather className="h-8 w-8" strokeWidth={1.8} />
           </div>
           <p className="mt-2 font-certificate-body text-xs font-bold uppercase text-certificate-green">
-            Delcio-English · Academia de Línguas
+            Delcio-English · Language Academy
           </p>
-          <h1 className="mt-1 font-certificate-heading text-5xl font-bold uppercase text-certificate-green">
-            Certificado
+          <h1 className="mt-2 font-certificate-heading text-3xl font-bold text-certificate-green">
+            Certificate of Achievement
           </h1>
           <div className="mt-1 flex items-center gap-3 sm:gap-4">
             <span className="h-px w-14 bg-certificate-copper" />
             <p className="font-certificate-body text-[11px] font-bold uppercase text-certificate-copper">
-              de conclusão e excelência
+              Completion and Excellence
             </p>
             <span className="h-px w-14 bg-certificate-copper" />
           </div>
           {details.sample && (
             <span className="mt-2 border border-certificate-copper/60 bg-certificate-copper/10 px-3 py-1 font-certificate-body text-[9px] font-semibold uppercase text-certificate-copper">
-              Exemplar demonstrativo
+              Demonstration Sample
             </span>
           )}
         </header>
 
         <section className="my-auto py-4 sm:py-5">
           <p className="font-certificate-heading text-base font-bold italic text-certificate-muted">
-            Certificamos, para os devidos fins, que
+            This is to certify that
           </p>
           <div className="mx-auto mt-2 max-w-3xl border-b border-certificate-copper/70 px-3 pb-2 sm:px-12">
             <p className="font-certificate-heading text-5xl font-bold text-certificate-green">
@@ -95,12 +96,12 @@ export function CourseCertificate({ details }: { details: CertificateDetails }) 
           </div>
           {details.idDocumentNumber && (
             <p className="mt-2 font-certificate-body text-xs font-semibold uppercase text-certificate-muted">
-              Portador(a) do {details.idDocumentType === "passport" ? "Passaporte" : "Bilhete de Identidade"} n.º {details.idDocumentNumber}
+              Holder of {details.idDocumentType === "passport" ? "Passport" : "Identity Card"} No. {details.idDocumentNumber}
             </p>
           )}
           <p className="mx-auto mt-3 max-w-2xl font-certificate-body text-sm font-medium leading-relaxed text-certificate-muted">
-            concluiu com mérito todos os módulos e requisitos do <strong className="font-semibold text-certificate-ink">{details.courseTitle}</strong>,
-            demonstrando proficiência no nível <strong className="font-semibold text-certificate-ink">{level}</strong> e alcançando a classificação final de <strong className="font-semibold text-certificate-ink">{details.finalScore}/100</strong>.
+            has successfully completed all modules and requirements of the <strong className="font-semibold text-certificate-ink">{courseTitle}</strong>,
+            demonstrating achievement at the <strong className="font-semibold text-certificate-ink">{level}</strong> level and passing the final examination with a score of <strong className="font-semibold text-certificate-ink">{details.finalScore}/100</strong>.
           </p>
         </section>
 
@@ -109,9 +110,9 @@ export function CourseCertificate({ details }: { details: CertificateDetails }) 
             <div
               className="relative mx-auto w-44 -rotate-6 select-none pt-2"
               role="img"
-              aria-label="Rubrica de Delcio João"
+              aria-label="Delcio João's signature"
             >
-              <span className="font-certificate-signature block text-center text-[4.25rem] leading-[0.85] tracking-[-0.08em] text-certificate-ink/85">
+              <span className="font-certificate-signature block text-center text-[4.25rem] leading-[0.85] text-certificate-ink/85">
                 D<span className="-ml-3">J</span>
               </span>
               <svg
@@ -145,17 +146,16 @@ export function CourseCertificate({ details }: { details: CertificateDetails }) 
             </div>
             <div className="mx-auto mt-1 h-px max-w-40 bg-certificate-green/60" />
             <p className="mt-1 text-[10px] font-semibold uppercase text-certificate-muted">Delcio João</p>
-            <p className="text-[9px] font-semibold uppercase text-certificate-muted">Direção académica</p>
+            <p className="text-[9px] font-semibold uppercase text-certificate-muted">Academic Director</p>
           </div>
 
-          <div className="relative flex flex-col items-center pb-1">
-            <div className="absolute bottom-0 flex gap-1" aria-hidden="true">
-              <span className="h-10 w-3 skew-x-12 bg-certificate-green/90" />
-              <span className="h-10 w-3 -skew-x-12 bg-certificate-copper/90" />
-            </div>
-            <div className="relative grid h-16 w-16 place-items-center rounded-full border-[3px] border-double border-certificate-paper bg-certificate-copper text-certificate-paper shadow-md sm:h-20 sm:w-20">
-              <div className="grid h-12 w-12 place-items-center rounded-full border border-certificate-paper/70 sm:h-16 sm:w-16">
-                <Award className="h-6 w-6 sm:h-8 sm:w-8" />
+          <div className="flex flex-col items-center pb-1" role="img" aria-label="Delcio-English academy stamp">
+            <div className="grid h-24 w-24 -rotate-12 place-items-center rounded-full border-[3px] border-double border-certificate-green text-certificate-green/85">
+              <div className="flex h-20 w-20 flex-col items-center justify-center rounded-full border border-dashed border-certificate-green/70 font-certificate-body">
+                <span className="text-[7px] font-bold uppercase">Delcio-English</span>
+                <Award className="my-1 h-6 w-6" />
+                <span className="text-[8px] font-bold uppercase">Academy Seal</span>
+                <span className="mt-0.5 text-[6px] font-semibold uppercase">Language Academy</span>
               </div>
             </div>
           </div>
@@ -163,14 +163,14 @@ export function CourseCertificate({ details }: { details: CertificateDetails }) 
           <div className="flex min-w-0 items-end justify-center gap-2 text-left font-certificate-body sm:gap-3">
             <div className="min-w-0">
               <div className="flex items-center gap-1 text-[10px] font-bold text-certificate-green">
-                <CheckCircle2 className="h-3 w-3 shrink-0" /> Autenticidade verificável
+                <CheckCircle2 className="h-3 w-3 shrink-0" /> Verifiable Authenticity
               </div>
-              <p className="mt-1 text-[9px] font-medium text-certificate-muted">Emitido em {date}</p>
+              <p className="mt-1 text-[9px] font-medium text-certificate-muted">Issued on {date}</p>
               <p className="mt-1 max-w-40 truncate font-mono text-[8px] font-medium text-certificate-muted">
                 {details.verificationCode}
               </p>
             </div>
-            <div className="shrink-0 border border-certificate-copper bg-certificate-qr p-1" aria-label="Código QR de verificação">
+            <div className="shrink-0 border border-certificate-copper bg-certificate-qr p-1" aria-label="Verification QR code">
               <QRCodeSVG value={details.verificationUrl} size={58} level="M" />
             </div>
           </div>

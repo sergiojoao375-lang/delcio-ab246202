@@ -9,5 +9,6 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 - Vocabulary flashcards are created server-side in addMessage when an assistant message has a correction — keeps the word bank automatic.
-- Course certificates are issued only through the authenticated database function after a passed final exam, and public verification exposes only certificate fields.
+- Course certificates are issued only through the authenticated identity-document database function after a passed final exam at the terminal CEFR level; old exam attempts cannot qualify, and public verification exposes only certificate fields.
+- The client-safe levels module owns progression and exam eligibility helpers used by server functions; AI tutoring, lesson generation and exams use the same CEFR mapping to avoid inconsistent difficulty.
 - Certificate previews measure the full document height before scaling to their container, so signatures and verification details are never clipped.

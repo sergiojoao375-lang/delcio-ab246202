@@ -79,7 +79,7 @@ function TestPage() {
         setResult(null);
       } else if (res.reason === "locked") {
         setNotice(
-          "O teste ainda está bloqueado: você precisa manter a ofensiva e somar pontos suficientes com os exercícios das aulas.",
+          kind === "final" ? "O exame final só está disponível no nível Proficiente (C2), após o nivelamento." : "O teste ainda está bloqueado: precisa de cumprir os dias, a sequência e os pontos de prática do nível atual.",
         );
       } else if (res.reason === "max_level") {
         setNotice("Você já está no nível mais alto do curso. Parabéns!");
@@ -195,7 +195,7 @@ function TestPage() {
               {result.kind === "placement"
                 ? `Seu nível é ${LEVEL_LABEL[result.recommendedLevel]}`
                 : result.passed
-                  ? result.kind === "final" ? "Curso concluído! O seu certificado está pronto 🎉" : "Aprovado! Você subiu de nível 🎉"
+                  ? result.kind === "final" ? "C2 concluído! Já pode pedir o seu certificado 🎉" : "Aprovado! Você subiu de nível 🎉"
                   : "Ainda não foi desta vez"}
             </h2>
             <p className="mt-2 text-3xl font-bold">{result.score}/100</p>
