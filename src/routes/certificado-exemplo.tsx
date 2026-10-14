@@ -28,18 +28,18 @@ function CertificateExamplePage() {
         </div>
         <CourseCertificate details={{
           fullName: "Maria de Sousa",
-          courseTitle: "Curso Completo de Inglês",
-          level: "advanced",
+          courseTitle: "Complete English Course",
+          level: "proficient",
           finalScore: 92,
-          issuedAt: "2026-10-02T10:00:00.000Z",
-          verificationCode: "EXEMPLO-DEMONSTRATIVO",
+          issuedAt: "2026-10-14T10:00:00.000Z",
+          verificationCode: "DEMONSTRATION-SAMPLE",
           verificationUrl,
           sample: true,
           idDocumentType: "bi",
           idDocumentNumber: "004567891LA042",
         }} />
         <p className="mt-4 text-center text-sm text-muted-foreground print:hidden">
-          O certificado oficial será liberado depois da aprovação no exame final e terá um QR de validação único.
+          O certificado oficial fica disponível dentro de 24 horas após o pedido, depois de concluir C2 e passar o exame final C2. Formato A4 horizontal, com código QR de validação único.
         </p>
       </div>
     </main>
