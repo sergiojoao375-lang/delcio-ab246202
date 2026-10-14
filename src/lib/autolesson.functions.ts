@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import type { LessonExercise } from "@/lib/db.functions";
+import { LEVEL_ENGLISH_LABEL, type Level } from "@/lib/levels";
 
 const MIN_CORRECTIONS_AUTO = 5;
 const MIN_CORRECTIONS_MANUAL = 2;
@@ -44,7 +45,7 @@ function coerce(raw: string): Generated | null {
           hint: typeof e.hint === "string" ? e.hint.trim() : undefined,
         }))
     : [];
-  const level = ["Iniciante", "Intermediário", "Avançado"].includes(parsed.level)
+  const level = ["Iniciante", "Intermediário", "Avançado", "Avançado (C1)", "Proficiente (C2)"].includes(parsed.level)
     ? parsed.level
     : "Iniciante";
   return {
@@ -76,12 +77,12 @@ Reply with ONLY a JSON object, no markdown:
 {
   "title": "short lesson title in Portuguese",
   "description": "one sentence in Portuguese saying which mistakes this lesson fixes",
-  "level": "Iniciante" | "Intermediário" | "Avançado",
+  "level": "Iniciante" | "Intermediário" | "Avançado" | "Avançado (C1)" | "Proficiente (C2)",
   "focus": "comma-separated grammar/vocabulary points in Portuguese",
   "body": "the lesson text in Markdown: short explanation in Portuguese, English example sentences, and a mini vocabulary list. 200-450 words.",
   "exercises": [{ "question": "exercise prompt (English sentence to fix/complete)", "answer": "expected answer", "hint": "short hint in Portuguese" }]
 }
-Include 4 to 6 exercises derived from the student's real mistakes.`,
+Include 4 to 6 exercises derived from the student's real mistakes. Match the supplied CEFR level, including sophisticated register, inference and idiomatic precision for C1/C2. Use European Portuguese for explanations.`,
         },
         { role: "user", content: prompt },
       ],
@@ -143,7 +144,9 @@ export const generateLessonFromHistory = createServerFn({ method: "POST" })
       .join("\n")
       .slice(0, 6000);
 
-    const generated = coerce(await askAI(prompt));
+    const { data: learner } = await supabase.from("learner_profiles").select("level").eq("user_id", userId).maybeSingle();
+    const learnerLevel = LEVEL_ENGLISH_LABEL[learner?.level as Level] ?? "Beginner (A1)";
+    const generated = coerce(await askAI(`Student CEFR level: ${learnerLevel}\n${prompt}`));
     if (!generated) return { created: false as const, reason: "ai_failed" as const };
 
     const { data: row, error: insErr } = await supabase

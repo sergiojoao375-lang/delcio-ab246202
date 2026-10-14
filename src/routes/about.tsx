@@ -39,7 +39,7 @@ const FEATURES = [
   {
     icon: Trophy,
     title: "Níveis e progresso",
-    text: "Ganha pontos, mantém a tua sequência e sobe de Iniciante até Avançado.",
+    text: "Ganha pontos, mantém a tua sequência e percorre os seis níveis, de A1 até Proficiente (C2).",
   },
   {
     icon: WifiOff,

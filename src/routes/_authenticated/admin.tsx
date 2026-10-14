@@ -218,6 +218,8 @@ function AdminPage() {
                 <option>Iniciante</option>
                 <option>Intermediário</option>
                 <option>Avançado</option>
+                <option>Avançado (C1)</option>
+                <option>Proficiente (C2)</option>
               </select>
             </div>
             <div>

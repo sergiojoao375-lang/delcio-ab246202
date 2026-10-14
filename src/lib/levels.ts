@@ -1,6 +1,6 @@
 /** Escada de níveis e regras do plano de estudo (client-safe). */
 
-export const LEVELS = ["beginner", "elementary", "intermediate", "advanced"] as const;
+export const LEVELS = ["beginner", "elementary", "intermediate", "advanced", "higher", "proficient"] as const;
 export type Level = (typeof LEVELS)[number];
 
 export const LEVEL_LABEL: Record<Level, string> = {
@@ -8,7 +8,26 @@ export const LEVEL_LABEL: Record<Level, string> = {
   elementary: "Elementary (A2)",
   intermediate: "Intermediate (B1)",
   advanced: "Advanced (B2)",
+  higher: "Avançado (C1)",
+  proficient: "Proficiente (C2)",
 };
+
+export const LEVEL_ENGLISH_LABEL: Record<Level, string> = {
+  beginner: "Beginner (A1)",
+  elementary: "Elementary (A2)",
+  intermediate: "Intermediate (B1)",
+  advanced: "Upper Intermediate (B2)",
+  higher: "Advanced (C1)",
+  proficient: "Proficient (C2)",
+};
+
+export function canTakeFinalExam(level: string, placementDone: boolean) {
+  return level === "proficient" && placementDone;
+}
+
+export function isC2FinalExam(test: { kind: string; from_level: string | null; to_level: string | null }) {
+  return test.kind === "final" && test.from_level === "proficient" && test.to_level === "proficient";
+}
 
 export const DAILY_GOALS = [10, 15, 30, 60] as const;
 export type DailyGoal = (typeof DAILY_GOALS)[number];
@@ -20,7 +39,7 @@ export const GOAL_LABEL: Record<number, string> = {
   60: "60 min/dia — intenso",
 };
 
-/** Dias mínimos em cada nível, calibrados para: 15 min/dia ≈ 3 meses, 30 min/dia ≈ 2 meses no curso completo. */
+/** Dias mínimos por nível; a duração total acompanha o número de níveis do percurso. */
 export function daysPerLevel(goalMinutes: number): number {
   if (goalMinutes >= 60) return 11;
   if (goalMinutes >= 30) return 15;

@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import type { Database } from "@/integrations/supabase/types";
+import { canTakeFinalExam } from "@/lib/levels";
 
 export const CERTIFICATE_DELAY_MS = 24 * 60 * 60 * 1000;
 
@@ -40,13 +41,13 @@ export const getCertificateStatus = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     const [{ data: profile }, { data: finalTest }, { data: identity }] = await Promise.all([
-      context.supabase.from("learner_profiles").select("level").eq("user_id", context.userId).maybeSingle(),
-      context.supabase.from("level_tests").select("score").eq("user_id", context.userId).eq("kind", "final").eq("status", "done").eq("passed", true).order("created_at", { ascending: false }).limit(1).maybeSingle(),
+      context.supabase.from("learner_profiles").select("level, placement_done").eq("user_id", context.userId).maybeSingle(),
+      context.supabase.from("level_tests").select("score").eq("user_id", context.userId).eq("kind", "final").eq("from_level", "proficient").eq("to_level", "proficient").eq("status", "done").eq("passed", true).gte("score", 70).order("created_at", { ascending: false }).limit(1).maybeSingle(),
       context.supabase.from("profiles").select("display_name").eq("id", context.userId).maybeSingle(),
     ]);
     return {
-      eligibleForFinal: profile?.level === "advanced",
-      finalPassed: !!finalTest,
+      eligibleForFinal: canTakeFinalExam(profile?.level ?? "", profile?.placement_done === true),
+      finalPassed: canTakeFinalExam(profile?.level ?? "", profile?.placement_done === true) && !!finalTest,
       finalScore: finalTest?.score ?? null,
       suggestedName: identity?.display_name ?? "",
     };
