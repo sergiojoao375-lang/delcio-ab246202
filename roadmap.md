@@ -1,8 +1,8 @@
 # Roadmap
 
-- [ ] Acrescentar C1 e C2 ao percurso, aulas e testes
-- [ ] Reservar novos certificados para aprovação no exame final C2
-- [ ] Apresentar certificado em inglês com carimbo e verificar A4 horizontal
+- [x] Acrescentar C1 e C2 ao percurso, aulas e testes
+- [x] Reservar novos certificados para aprovação no exame final C2
+- [x] Apresentar certificado em inglês com carimbo e verificar A4 horizontal
 
 - [x] Corrigir o corte inferior do certificado
 - [ ] Ocultar o selo Lovable — bloqueado: requer papel de editor num plano Pro ou superior
