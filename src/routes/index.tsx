@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { addMessage, createConversation, getMyAccess } from "@/lib/db.functions";
 import { getLearner } from "@/lib/learning.functions";
+import { LEVELS, LEVEL_LABEL, type Level } from "@/lib/levels";
 import { usePractice } from "@/hooks/use-practice";
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -53,8 +54,6 @@ type Bubble =
   | { id: string; kind: "bot"; text: string; translation?: string; voiceId?: string }
   | { id: string; kind: "user"; text: string }
   | { id: string; kind: "correction"; text: string };
-
-const LEVELS = ["Iniciante", "Básico", "Elementar", "Pré-intermediário", "Intermediário"];
 
 function uid() {
   return Math.random().toString(36).slice(2, 10);
@@ -261,9 +260,10 @@ function Index() {
     navigate({ to: "/auth", replace: true });
   }
 
-  const levelIndex = Math.min(Math.floor(score / 80), LEVELS.length - 1);
-  const level = LEVELS[levelIndex];
-  const nextLevel = levelIndex < LEVELS.length - 1 ? LEVELS[levelIndex + 1] : null;
+  const levelIndex = Math.max(0, LEVELS.indexOf((learner?.level ?? "beginner") as Level));
+  const level = LEVEL_LABEL[LEVELS[levelIndex] ?? "beginner"];
+  const nextLevelKey = LEVELS[levelIndex + 1];
+  const nextLevel = nextLevelKey ? LEVEL_LABEL[nextLevelKey] : null;
   const turnsInCycle = turns % 10;
   const progress = (turnsInCycle / 10) * 100;
 
@@ -1063,7 +1063,7 @@ function Index() {
               {LEVELS.map((l, i) => (
                 <span
                   key={l}
-                  title={l}
+                  title={LEVEL_LABEL[l]}
                   className={`h-2 rounded-full transition-all ${
                     i < levelIndex
                       ? "w-4 bg-correction/70"
